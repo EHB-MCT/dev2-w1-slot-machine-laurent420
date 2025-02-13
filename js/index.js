@@ -1,27 +1,27 @@
-import {
-    slotMachine
-} from "./slotMachine.js";
+import { slotMachine } from "./slotMachine.js";
 
 function init() {
     console.log("Init");
-    // TODO: log the document using console.log to test if you can get access to it
-    // TODO: log the submit button. If that works, store that button in a variable
-    // TODO: attach an event listener to that button and show a log "button clicked"
-    // TODO: if the submit button is clicked, the lever is pulled (= call that function)
+    const button = document.getElementById("button");
+    button.addEventListener("click", pullLever);
+    slotMachine.reset();
 }
 
 function pullLever() {
-    // TODO: reset the machine (you may skip this step for now, and focus on getting the machine to work first)
-    // TODO: spin the slot machine
-    // TODO: show slots and win status
+    slotMachine.reset();
+    slotMachine.spin();
+    showSlots();
+    showGameResult();
 }
 
 function showSlots() {
-    // TODO: show the slot symbols in HTML
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = slotMachine.slots.map(symbol => `<span class="${symbol}">${symbol}</span>`).join(" ");
 }
 
 function showGameResult() {
-    // TODO: show a win or lose message in HTML
+    const statusP = document.getElementById("status");
+    statusP.textContent = slotMachine.win ? "JE WINT 🎉💰" : "JE VERLIEST 😭🥺";
 }
 
 init();
